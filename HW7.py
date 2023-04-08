@@ -76,7 +76,14 @@ def make_players_table(data, cur, conn):
         # the player's name, their position_id, and their nationality.
 
 def nationality_search(countries, cur, conn):
-    pass
+    players = []
+    cur.execute("SELECT name, position_id, nationality FROM Players")
+    player_info = cur.fetchall()
+    for player in player_info:
+        if player[2] in countries:
+            players.append(player)
+    conn.commit()
+    return players
 
 ## [TASK 3]: 10 points
 # finish the function birthyear_nationality_search
